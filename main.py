@@ -15,8 +15,6 @@ def delete_files():
         os.remove(f)
     os.remove('main.html')
 
-def get_random_image_files():
-    return random.sample(os.listdir('imgs/'), 3)
 
 
 def main():
@@ -64,8 +62,11 @@ def main():
         for _ in range(number_of_volunteers):
             list_of_titles.append(create_buzz_title())
 
-        for _ in range(number_of_volunteers):
-            list_of_pictures.append(get_random_image_files())
+        all_images = os.listdir('imgs/')
+        selected_images = random.sample(all_images, number_of_volunteers * 3)
+
+        for i in range(number_of_volunteers):
+            list_of_pictures.append(selected_images[i*3:(i+1)*3])
 
         number = 0
         for name, title in zip(list_of_names, list_of_titles):
